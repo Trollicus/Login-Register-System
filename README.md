@@ -1,6 +1,9 @@
 # Login-Register-System
 A PHP Login/Register System, the registration includes a key that you 'have to buy'
 
+The Login/Register System includes a admin panel discord bot with which you can blacklist people and/or add tokens.
+
+
 Here are some gifs of me using it:
 https://gyazo.com/1d6128d04684ba9b027879ca55d155d5
 and                                      
