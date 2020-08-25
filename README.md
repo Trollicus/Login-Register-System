@@ -11,8 +11,9 @@ It's a Login/Register PHP System with which by creating a brand new account it i
 
 ## Videos of me using it 
 
-<a href=""><img src="https://gyazo.com/1d6128d04684ba9b027879ca55d155d5" title=""/></a>
-<a href=""><img src="https://gyazo.com/e772dd2c402fcd5524c2da30e68a6370" title=""/></a>
+![firstone](https://user-images.githubusercontent.com/40140975/91166691-9b60b080-e687-11ea-9f4b-79c075cfe3ee.gif)
+![secondone](https://user-images.githubusercontent.com/40140975/91166707-a0bdfb00-e687-11ea-81a4-29d2879633b3.gif)
+
 
 ## ToDo List
 
