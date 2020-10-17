@@ -1,15 +1,15 @@
 {
   "name": "thonk",
   "version": "1.0.0",
-  "description": "",
+  "description": "Discord Bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "author": "Trollicus",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.2.0",
-    "mysql": "^2.18.1"
+    "discord.js": "latest",
+    "mysql": "latest"
   }
 }

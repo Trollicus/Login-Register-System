@@ -1,61 +1,59 @@
-const discord = require("discord.js");
+const discord = require('discord.js');
 const bot = new discord.Client();
-var mysql = require("mysql");
+const mysql = require('mysql');
 
+const conn = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'autism',
+});
 
-var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "autism"
+conn.connect((err) => {
+  if (err) throw err;
+  else console.log('Connected to Database.');
 });
 
 bot.on('message', (message) => {
+  if (message.content == 'add') {
+    const collector = new discord.MessageCollector(
+      message.channel,
+      (m) => m.author.id === message.author.id,
+      { time: 10000 }
+    );
 
-  //  var variableToken;
+    console.log(collector);
 
-    if (message.content == "add") {
-        const collector = new discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
-        console.log(collector);
-        collector.on('collect', message => {
-            var bruh = message.content;
+    collector.on('collect', async (message) => {
+      await conn.query(
+        'INSERT INTO tokenz (user_token) VALUES (?);',
+        [message.content],
+        (err, res) => {
+          if (err) throw err;
+          message.reply('Token was successfully added!');
+        }
+      );
+    });
+  } else if (message.content == 'blacklist') {
+    const collector = new discord.MessageCollector(
+      message.channel,
+      (m) => m.author.id === message.author.id,
+      { time: 10000 }
+    );
 
-         //   message.reply("Connected!");
-                var sql = "INSERT INTO tokenz (user_token) VALUES ('"+ bruh +"')";
-                con.query(sql, function (err, result) {
-                    if (err) throw err;
-    
-                    message.reply("Token was successfully added!");
-                   
-                }); 
-          //  });
-            
-        });
-    }
-    else if (message.content == "blacklist"){
-      
-        const collector = new discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
-        console.log(collector);
-        collector.on('collect', message => {
-            var blacklistedPerson = message.content;
+    console.log(collector);
 
-          //  con.connect(function(err) {
-            //    if(err) throw err;
-    
-            //    message.reply("Connected!");
-
-                var sqli = "DELETE FROM dang WHERE user_username = '" + blacklistedPerson +  "'";
-                con.query(sqli, function(err, result) {
-                    if(err) throw err;
-    
-                    message.reply("Successfully Blacklisted!");
-                    
-                });
-           // });
-        });
-        
-    }
-
+    collector.on('collect', async (message) => {
+      await conn.query(
+        `DELETE FROM dang WHERE user_username = '?';`,
+        [message.content],
+        (err, res) => {
+          if (err) throw err;
+          message.reply('Successfully Blacklisted!');
+        }
+      );
+    });
+  }
 });
 
-bot.login("token");
+bot.login('token');
